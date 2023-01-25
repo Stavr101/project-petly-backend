@@ -34,7 +34,9 @@ const noticeShema = new Schema({
   price: {
     type: Number,
     min: 1,
-    required: true,
+    required: function (req, res) {
+      return this.categoryName === "sell";
+    },
   },
   categoryName: {
     type: String,
