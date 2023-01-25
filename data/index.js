@@ -78,7 +78,7 @@ const services = [
     _id: newsIds[11],
     name: "LKP LEV",
     link: "https://lkplev.com/",
-    brandImage: `${path.join("services", newsIds[11])}`,
+    brandImage: `${path.join("services", "lev")}`,
     schedule: {
       mn: "08:00- 19:00",
       tu: "08:00- 19:00",
@@ -96,7 +96,7 @@ const services = [
     _id: newsIds[12],
     name: "Barbos",
     link: "https://www.facebook.com/NGO.Barbos",
-    brandImage: `${path.join("services", newsIds[12])}`,
+    brandImage: `${path.join("services", "barbos")}`,
     schedule: {
       mn: "08:00- 20:00",
       tu: "08:00- 20:00",
@@ -114,7 +114,7 @@ const services = [
     _id: newsIds[13],
     name: "Whiskas",
     link: "https://www.whiskas.ua/",
-    brandImage: `${path.join("services", newsIds[13])}`,
+    brandImage: `${path.join("services", "whiskas")}`,
     schedule: {
       tu: "08:00- 20:00",
       mn: "08:00- 20:00",
@@ -132,7 +132,7 @@ const services = [
     _id: newsIds[14],
     name: "Happy paw",
     link: "https://happypaw.ua/ua/",
-    brandImage: `${path.join("services", newsIds[14])}`,
+    brandImage: `${path.join("services", "happypaw")}`,
     schedule: {
       mn: "08:00- 20:00",
       tu: "08:00- 20:00",
@@ -150,7 +150,7 @@ const services = [
     _id: newsIds[15],
     name: "PetHelp",
     link: "https://pethelp.com.ua/",
-    brandImage: `${path.join("services", newsIds[15])}`,
+    brandImage: `${path.join("services", "pethelp")}`,
     schedule: {
       mn: "08:00- 19:00",
       tu: "08:00- 19:00",
@@ -168,7 +168,7 @@ const services = [
     _id: newsIds[16],
     name: "Sirius",
     link: "https://dogcat.com.ua/",
-    brandImage: `${path.join("services", newsIds[16])}`,
+    brandImage: `${path.join("services", "sirius")}`,
     schedule: {
       mn: "08:00- 16:00",
       tu: "08:00- 16:00",
@@ -186,7 +186,7 @@ const services = [
     _id: newsIds[17],
     name: "Purina",
     link: "https://www.purina.ua/",
-    brandImage: `${path.join("services", newsIds[17])}`,
+    brandImage: `${path.join("services", "purina")}`,
     schedule: {
       mn: "08:00- 19:00",
       tu: "08:00- 19:00",
@@ -204,7 +204,7 @@ const services = [
     _id: newsIds[18],
     name: "Josera",
     link: "https://josera.ua/",
-    brandImage: `${path.join("services", newsIds[18])}`,
+    brandImage: `${path.join("services", "josera")}`,
     schedule: {
       mn: "09:00- 17:00",
       tu: "09:00- 17:00",
@@ -222,7 +222,7 @@ const services = [
     _id: newsIds[19],
     name: "LICO",
     link: "https://lico.vet/",
-    brandImage: `${path.join("services", newsIds[19])}`,
+    brandImage: `${path.join("services", "lico")}`,
     schedule: {
       mn: "09:00- 20:00",
       tu: "09:00- 20:00",
@@ -233,8 +233,8 @@ const services = [
       su: "09:00- 20:00",
     },
     address: "Dryhetiv Street, 77 ",
-    email: "",
-    phone: "",
+    email: "lico@gmail.com",
+    phone: "+38 097 509 8005",
   },
 ];
 

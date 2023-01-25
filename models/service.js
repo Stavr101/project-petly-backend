@@ -3,7 +3,6 @@ const { Schema, model } = require("mongoose");
 const { handleMongooseError } = require("../helpers");
 
 const emailRegexp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-const phoneRegexp = /?=.*\+[0-9]{3}\s?[0-9]{2}\s?[0-9]{3}\s?[0-9]{4,5}$/;
 
 const serviceSchema = new Schema(
   {
@@ -47,7 +46,6 @@ const serviceSchema = new Schema(
     },
     phone: {
       type: String,
-      match: phoneRegexp,
       required: true,
     },
   },
@@ -67,7 +65,7 @@ const schemas = {
   addSchema,
 };
 
-const Service = model("service", newsSchema);
+const Service = model("service", serviceSchema);
 
 module.exports = {
   Service,
