@@ -13,6 +13,10 @@ const serviceSchema = new Schema(
       max: 20,
       required: true,
     },
+    link: {
+      type: String,
+      required: true,
+    },
     brandImage: {
       type: String,
       required: true,
