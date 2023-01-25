@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
 require("colors");
-const { news } = require ("./data")
-const { News } = require("./models/news");
 
 const app = require("./app");
 
@@ -13,7 +11,6 @@ mongoose
   .connect(DB_HOST)
   .then(() => {
     app.listen(PORT, () => {
-       News.insertMany(news);
       console.log(
         `Server running. Use our API on port: ${PORT} !!! Database success`.cyan
           .bold.italic
