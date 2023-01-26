@@ -3,8 +3,11 @@ const logger = require("morgan");
 
 const authRouter = require("./routes/api/auth");
 const contactsRouter = require("./routes/api/contacts");
+
 const newsRouter = require("./routes/api/news");
 const noticesRouter = require("./routes/api/notices");
+const newsRouter = require("./routes/api/news");
+const servicesRouter = require("./routes/api/services");
 
 require("dotenv").config();
 
@@ -19,8 +22,10 @@ app.use(express.static("public"));
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/contacts", contactsRouter);
-app.use("/api/v1/news", newsRouter);
+
 app.use("/api/v1/notices", noticesRouter);
+app.use("/api/v1/news", newsRouter);
+app.use("/api/v1/services", servicesRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
