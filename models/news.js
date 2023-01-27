@@ -8,15 +8,15 @@ const newsSchema = new Schema(
       type: String,
       required: true,
     },
-    link: {
+    url: {
       type: String,
       required: true,
     },
-    release: {
+    date: {
       type: String,
       required: true,
     },
-    content: {
+    description: {
       type: String,
       default: false,
     },
