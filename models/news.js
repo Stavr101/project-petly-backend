@@ -28,9 +28,9 @@ newsSchema.post("save", handleMongooseError);
 
 const addSchema = Joi.object({
   title: Joi.string().required(),
-  link: Joi.string().required(),
-  release: Joi.string().required(),
-  content: Joi.string().required(),
+  url: Joi.string().required(),
+  date: Joi.string().required(),
+  description: Joi.string().required(),
 });
 
 const schemas = {

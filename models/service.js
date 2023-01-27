@@ -6,30 +6,33 @@ const emailRegexp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
 const serviceSchema = new Schema(
   {
-    name: {
+    title: {
       type: String,
       min: 2,
       max: 20,
       required: true,
     },
-    link: {
+    url: {
       type: String,
       required: true,
     },
-    brandImage: {
+    addressUrl: {
+      type: String,
+    },
+    imageUrl: {
       type: String,
       required: true,
     },
-    schedule: {
-      type: {
-        mn: String,
-        tu: String,
-        we: String,
-        th: String,
-        fr: String,
-        sa: String,
-        su: String,
-      },
+    workDays: {
+      type: [
+        { isOpen: Boolean, from: String, to: String },
+        { isOpen: Boolean, from: String, to: String },
+        { isOpen: Boolean, from: String, to: String },
+        { isOpen: Boolean, from: String, to: String },
+        { isOpen: Boolean, from: String, to: String },
+        { isOpen: Boolean, from: String, to: String },
+        { isOpen: Boolean, from: String, to: String },
+      ],
       required: true,
     },
     address: {
@@ -56,9 +59,13 @@ serviceSchema.post("save", handleMongooseError);
 
 const addSchema = Joi.object({
   title: Joi.string().required(),
-  link: Joi.string().required(),
-  release: Joi.string().required(),
-  content: Joi.string().required(),
+  url: Joi.string().required(),
+  addressUrl: Joi.string().required(),
+  imageUrl: Joi.string().required(),
+  workDays: Joi.string().required(),
+  address: Joi.string().required(),
+  email: Joi.string().required(),
+  phone: Joi.string().required(),
 });
 
 const schemas = {
