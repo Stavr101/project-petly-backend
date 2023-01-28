@@ -8,15 +8,15 @@ const newsSchema = new Schema(
       type: String,
       required: true,
     },
-    link: {
+    url: {
       type: String,
       required: true,
     },
-    release: {
+    date: {
       type: String,
       required: true,
     },
-    content: {
+    description: {
       type: String,
       default: false,
     },
@@ -28,9 +28,9 @@ newsSchema.post("save", handleMongooseError);
 
 const addSchema = Joi.object({
   title: Joi.string().required(),
-  link: Joi.string().required(),
-  release: Joi.string().required(),
-  content: Joi.string().required(),
+  url: Joi.string().required(),
+  date: Joi.string().required(),
+  description: Joi.string().required(),
 });
 
 const schemas = {
