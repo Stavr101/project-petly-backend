@@ -4,10 +4,10 @@ const { handleMongooseError } = require("../helpers");
 
 // eslint-disable-next-line no-useless-escape
 const emailRegexp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-const phoneRegexp = /^[+][(]{0,1}[0-9]{1,4}[)]{0,1}[-\s./0-9]$/;
+const phoneRegexp = /^\+[1-9]{1}[0-9]{3,14}$/;
 const nameRegexp = /^[a-zA-Z]+$/;
 const addressRegexp = /^[a-zA-Z]+(,\s[a-zA-Z]+)*$/;
-const pwdRegexp = /^(?=.[A-Za-z])(?=.\d)[A-Za-z\d]{7,32}$/;
+const pwdRegexp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d$@$!%*#?&]{7,32}$/;
 
 const userSchema = new Schema(
   {
@@ -20,11 +20,13 @@ const userSchema = new Schema(
       type: String,
       match: emailRegexp,
       unique: true,
+      trim: true,
+      lowercase: true,
       required: [true, "Email is required"],
     },
     password: {
       type: String,
-      match: pwdRegexp,
+      // match: pwdRegexp,
       minlength: 7,
       required: true,
     },
@@ -39,6 +41,7 @@ const userSchema = new Schema(
     },
     address: {
       type: String,
+      match: addressRegexp,
       required: [true, "Address is required"],
     },
     favorite: {
@@ -55,7 +58,7 @@ const userSchema = new Schema(
     },
     verify: {
       type: Boolean,
-      default: false,
+      default: true, //need to change on false for email verification
     },
     verificationToken: {
       type: String,
@@ -70,13 +73,13 @@ userSchema.post("save", handleMongooseError);
 const registerSchema = Joi.object({
   name: Joi.string().pattern(nameRegexp).required(),
   email: Joi.string().pattern(emailRegexp).required(),
-  password: Joi.string().min(7).max(32).pattern(pwdRegexp).required(),
+  password: Joi.string().min(7).max(32).required(),
   address: Joi.string().pattern(addressRegexp).required(),
   phone: Joi.string().pattern(phoneRegexp).required(),
 });
 const loginSchema = Joi.object({
   email: Joi.string().pattern(emailRegexp).required(),
-  password: Joi.string().min(7).pattern(pwdRegexp).required(),
+  password: Joi.string().min(7).required(),
 });
 
 const verifyEmailSchema = Joi.object({

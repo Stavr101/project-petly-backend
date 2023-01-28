@@ -4,12 +4,6 @@ require("dotenv").config();
 const { SENDGRID_API_KEY } = process.env;
 sgMail.setApiKey(SENDGRID_API_KEY);
 
-// const data = {
-//   to: "kocog87241@v3dev.com",
-//   subject: "Verify email",
-//   html: `<p>Verify email</p>`,
-// };
-
 const sendEmail = async (data) => {
   // eslint-disable-next-line no-useless-catch
   try {
