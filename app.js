@@ -6,7 +6,6 @@ const contactsRouter = require("./routes/api/contacts");
 
 const newsRouter = require("./routes/api/news");
 const noticesRouter = require("./routes/api/notices");
-const newsRouter = require("./routes/api/news");
 const servicesRouter = require("./routes/api/services");
 
 require("dotenv").config();
