@@ -46,6 +46,7 @@ const userSchema = new Schema(
     },
     favorite: {
       type: Array,
+      ref: "notice",
       default: null,
     },
     avatarURL: {
