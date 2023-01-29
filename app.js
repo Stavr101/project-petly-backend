@@ -4,8 +4,8 @@ const logger = require("morgan");
 const authRouter = require("./routes/api/auth");
 const contactsRouter = require("./routes/api/contacts");
 
-const noticesRouter = require("./routes/api/notices");
 const newsRouter = require("./routes/api/news");
+const noticesRouter = require("./routes/api/notices");
 const servicesRouter = require("./routes/api/services");
 
 require("dotenv").config();

@@ -1,11 +1,13 @@
 const { Notice } = require("../../models/notice");
+const { searchFilter } = require("../../helpers");
 
-const getByCategory = async (req, res) => {
+const getNoticesByCategory = async (req, res) => {
   const { categoryName } = req.params;
-  const { page = 1, limit = 10 } = req.query;
-  const skip = (page - 1) * limit;
-  const result = await Notice.find({ categoryName });
-  res.json(result);
+  const { search, page, limit } = req.query;
+  const filter = searchFilter({ categoryName, search, page, limit });
+
+  const agrr = await Notice.aggregate(filter);
+  res.json(agrr);
 };
 
-module.exports = getByCategory;
+module.exports = getNoticesByCategory;
