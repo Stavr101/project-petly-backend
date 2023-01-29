@@ -13,7 +13,7 @@ const google = async (req, res) => {
   const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "23h" });
   await User.findByIdAndUpdate(id, { token });
 
-  res.redirect(`http://localhost:4000token=${token}`);
+  res.redirect(`http://localhost:4000?token=${token}`);
 };
 
 module.exports = google;
