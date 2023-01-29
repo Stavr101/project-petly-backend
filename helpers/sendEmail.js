@@ -7,7 +7,7 @@ sgMail.setApiKey(SENDGRID_API_KEY);
 const sendEmail = async (data) => {
   // eslint-disable-next-line no-useless-catch
   try {
-    const email = { ...data, from: "testpetsgoit@gmail.com" };
+    const email = { ...data, from: "Shishkin_SU@ukr.net" };
     await sgMail.send(email);
     return true;
   } catch (error) {
