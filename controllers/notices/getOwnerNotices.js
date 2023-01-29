@@ -5,7 +5,7 @@ const getOwnerNotices = async (req, res) => {
   const { search, page, limit } = req.query;
   const categoryName = null;
 
-  const filter = searchFilter(categoryName, search, page, limit, owner);
+  const filter = searchFilter({ categoryName, search, page, limit, owner });
 
   const result = await Notice.aggregate(filter);
   res.json(result);

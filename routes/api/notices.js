@@ -9,5 +9,18 @@ router.get(
   ctrlWrapper(ctrl.getNoticeById)
 );
 router.get("/own", authenticate, ctrlWrapper(ctrl.getOwnerNotices));
+
+router.get("/favorite", authenticate, ctrlWrapper(ctrl.getFavoriteNotices));
+router.patch(
+  "/favorite/:noticeId",
+  authenticate,
+  ctrlWrapper(ctrl.addNoticeToFavorite)
+);
+router.delete(
+  "/favorite/:noticeId",
+  authenticate,
+  ctrlWrapper(ctrl.removeFromFavoriteById)
+);
+
 router.post("/", authenticate, ctrlWrapper(ctrl.addNotice));
 module.exports = router;

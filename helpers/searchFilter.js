@@ -1,10 +1,11 @@
-const searchFilter = (
+const searchFilter = ({
   categoryName = null,
   search = null,
   page = 1,
   limit = 8,
-  owner = null
-) => {
+  owner = null,
+  favorite = null,
+}) => {
   const skip = (page - 1) * limit;
   const filter = [
     {
@@ -28,10 +29,21 @@ const searchFilter = (
   if (owner) {
     filter.unshift({ $match: { owner } });
   }
+
+  if (favorite) {
+    console.log(favorite);
+    filter.unshift({
+      $match: {
+        _id: { $in: favorite },
+      },
+    });
+  }
+
   if (search) {
     filter.unshift({
       $search: {
         index: "search_in_title",
+
         autocomplete: {
           query: search,
           path: "title",
