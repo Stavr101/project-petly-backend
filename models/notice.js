@@ -1,5 +1,6 @@
-// const { required } = require("joi");
-// const Joi = require("joi");
+const nameRegexp = /^[a-zA-Z]+$/;
+const addressRegexp = /^[a-zA-Z]+(,\s[a-zA-Z]+)*$/;
+
 const { Schema, model } = require("mongoose");
 
 const noticeShema = new Schema({
@@ -11,19 +12,31 @@ const noticeShema = new Schema({
   },
   name: {
     type: String,
+    match: nameRegexp,
     minlength: 2,
     maxlength: 16,
+  },
+  sex: {
+    type: String,
+    required: true,
+    enum: ["male", "female"],
   },
   birthdate: {
     type: Date,
   },
   breed: {
     type: String,
+    match: nameRegexp,
     minlength: 2,
     maxlength: 24,
   },
   location: {
+    match: addressRegexp,
     type: String,
+  },
+  petAvatarURL: {
+    type: String,
+    required: true,
   },
   comments: {
     type: String,
@@ -34,7 +47,7 @@ const noticeShema = new Schema({
   price: {
     type: Number,
     min: 1,
-    required: function (req, res) {
+    required: function () {
       return this.categoryName === "sell";
     },
   },

@@ -7,7 +7,6 @@ const getNoticesByCategory = async (req, res) => {
   const filter = searchFilter(categoryName, search, page, limit);
 
   const agrr = await Notice.aggregate(filter);
-
   res.json(agrr);
 };
 
