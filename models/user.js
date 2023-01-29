@@ -58,7 +58,7 @@ const userSchema = new Schema(
     },
     verify: {
       type: Boolean,
-      default: false, //need to change on false for email verification
+      default: true, //need to change on false for email verification
     },
     verificationToken: {
       type: String,
