@@ -6,8 +6,8 @@ const { handleMongooseError } = require("../helpers");
 const emailRegexp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const phoneRegexp = /^\+[1-9]{1}[0-9]{3,14}$/;
 const nameRegexp = /^[a-zA-Z]+$/;
-const addressRegexp = /^[a-zA-Z]+(,\s[a-zA-Z]+)*$/;
-const pwdRegexp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d$@$!%*#?&]{7,32}$/;
+const addressRegexp = /[a-zA-Z]+,[a-zA-Z]+/i;
+const pwdRegexp = /^[\S]{7,32}$/;
 
 const userSchema = new Schema(
   {
@@ -46,8 +46,8 @@ const userSchema = new Schema(
     },
     favorite: {
       type: Array,
-      ref: "notice",
-      default: null,
+      default: [],
+
     },
     avatarURL: {
       type: String,
