@@ -9,6 +9,11 @@ router.get(
   ctrlWrapper(ctrl.getNoticeById)
 );
 router.get("/own", authenticate, ctrlWrapper(ctrl.getOwnerNotices));
+router.delete(
+  "/own/:noticeId",
+  authenticate,
+  ctrlWrapper(ctrl.removeOwnNoticeById)
+);
 
 router.get("/favorite", authenticate, ctrlWrapper(ctrl.getFavoriteNotices));
 router.patch(
