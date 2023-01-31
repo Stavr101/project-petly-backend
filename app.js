@@ -7,6 +7,7 @@ const contactsRouter = require("./routes/api/contacts");
 const newsRouter = require("./routes/api/news");
 const noticesRouter = require("./routes/api/notices");
 const servicesRouter = require("./routes/api/services");
+const userRouter = require("./routes/api/user")
 
 require("dotenv").config();
 
@@ -25,6 +26,7 @@ app.use("/api/v1/contacts", contactsRouter);
 app.use("/api/v1/notices", noticesRouter);
 app.use("/api/v1/news", newsRouter);
 app.use("/api/v1/services", servicesRouter);
+app.use("/api/v1/user", userRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
