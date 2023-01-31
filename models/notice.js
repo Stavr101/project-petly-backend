@@ -44,6 +44,11 @@ const noticeShema = new Schema({
     maxlength: 120,
     required: true,
   },
+  categoryName: {
+    type: String,
+    enum: ["sell", "lost-found", "for-free"],
+    default: "sell",
+  },
   price: {
     type: Number,
     min: 1,
@@ -51,11 +56,7 @@ const noticeShema = new Schema({
       return this.categoryName === "sell";
     },
   },
-  categoryName: {
-    type: String,
-    enum: ["sell", "lost-found", "for-free"],
-    default: "sell",
-  },
+
   owner: {
     type: Schema.Types.ObjectId,
     ref: "user",

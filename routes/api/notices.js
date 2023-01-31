@@ -1,6 +1,7 @@
 const express = require("express");
 const ctrl = require("../../controllers/notices");
-const { validateBody, isValidId, authenticate } = require("../../middlewares");
+const { validateBody, authenticate, upload } = require("../../middlewares");
+
 const { ctrlWrapper } = require("../../helpers");
 const router = express.Router();
 router.get("/category/:categoryName", ctrlWrapper(ctrl.getNoticesByCategory));
@@ -27,5 +28,17 @@ router.delete(
   ctrlWrapper(ctrl.removeFromFavoriteById)
 );
 
-router.post("/", authenticate, ctrlWrapper(ctrl.addNotice));
+router.post(
+  "/",
+  authenticate,
+  upload.single("petAvatar"),
+  ctrlWrapper(ctrl.addNotice)
+);
+
+// router.post(
+//   "/upload",
+//   authenticate,
+//   upload.single("petAvatar"),
+//   ctrlWrapper(ctrl.uploadPetAvatar)
+// );
 module.exports = router;
