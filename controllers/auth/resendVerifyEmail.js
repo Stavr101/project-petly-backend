@@ -12,13 +12,13 @@ const resendVerifyEmail = async (req, res) => {
   if (user.verify) {
     throw HttpError(400, "User alredy verify");
   }
- const mail = {
-   to: email,
-   subject: "Please verify email",
-   html: `<a target="_blank" href="${BASE_URL}/api/auth/verify/${verificationToken}" target="_blank">Let's verify email</a>`,
- };
+  const mail = {
+    to: email,
+    subject: "Please verify email",
+    html: `<a target="_blank" href="${BASE_URL}/api/auth/verify/${verificationToken}" target="_blank">Let's verify email</a>`,
+  };
   await sendEmail(mail);
   res.json({ message: "Email verify resend" });
 };
 
-module.export = resendVerifyEmail;
+module.exports = resendVerifyEmail;
