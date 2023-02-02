@@ -1,0 +1,55 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "version": "1.0.0",
+    "title": "Petly project conection API",
+    "description": " API that help find and sell pets",
+    "contact": {
+      "name": "Swagger API Team",
+      "email": "apiteam@swagger.io",
+      "url": "http://swagger.io"
+    }
+  },
+  "consumes": ["application/json", "multipart/form-data"],
+  "produces": ["application/json"],
+  "servers": [
+    { "url": "https://project-petly-backend.onrender.com/api/v1" },
+    { "url": "http://localhost:4000" }
+  ],
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Authorization endpoints"
+    },
+    {
+      "name": "User",
+      "description": "Authorization endpoints"
+    },
+    {
+      "name": "Notice",
+      "description": "Authorization endpoints"
+    },
+    {
+      "name": "News",
+      "description": "Authorization endpoints"
+    },
+    {
+      "name": "Services",
+      "description": "Authorization endpoints"
+    }
+  ],
+
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "User registration",
+        "parameters": [],
+        "requestBody": {
+          "description": "Registration's object",
+          "required": true
+        }
+      }
+    }
+  }
+}

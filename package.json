@@ -30,6 +30,8 @@
     "nodemailer": "^6.8.0",
     "passport": "^0.6.0",
     "passport-google-oauth2": "^0.2.0",
+    "swagger-jsdoc": "5.0.1",
+    "swagger-ui-express": "^4.6.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
