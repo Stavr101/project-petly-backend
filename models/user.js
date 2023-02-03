@@ -8,6 +8,9 @@ const phoneRegexp = /^\+[1-9]{1}[0-9]{3,14}$/;
 const nameRegexp = /^[a-zA-Z]+$/;
 const addressRegexp = /[a-zA-Z]+, [a-zA-Z]+/i;
 const pwdRegexp = /^[\S]{7,32}$/;
+//дата народження з 1930-2010 рр
+const bdayRegexp =
+  /^(?:0[1-9]|[12][0-9]|3[01])[.](?:0[1-9]|1[012])[.](?:19[3-9][0-9]|2010)\b$/;
 
 const userSchema = new Schema(
   {
@@ -32,7 +35,9 @@ const userSchema = new Schema(
     },
     birthday: {
       type: String,
-      default: null,
+      // default: null,
+      match: bdayRegex,
+      default: "01.01.2000",
     },
     phone: {
       type: String,
@@ -47,7 +52,6 @@ const userSchema = new Schema(
     favorite: {
       type: Array,
       default: [],
-
     },
     avatarURL: {
       type: String,
