@@ -7,11 +7,15 @@ const contactsRouter = require("./routes/api/contacts");
 const newsRouter = require("./routes/api/news");
 const noticesRouter = require("./routes/api/notices");
 const servicesRouter = require("./routes/api/services");
-const userRouter = require("./routes/api/user")
+const userRouter = require("./routes/api/user");
+
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger.json");
 
 require("dotenv").config();
 
 const app = express();
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 const cors = require("cors");
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
@@ -29,7 +33,7 @@ app.use("/api/v1/services", servicesRouter);
 app.use("/api/v1/user", userRouter);
 
 app.use((req, res) => {
-  res.status(404).json({ message: "Not found" });
+  res.status(404).json({ message: "Bad request (invalid request body)" });
 });
 
 app.use((err, req, res, next) => {

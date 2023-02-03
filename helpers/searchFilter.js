@@ -16,6 +16,7 @@ const searchFilter = ({
         birthdate: 1,
         breed: 1,
         location: 1,
+        petAvatarURL: 1,
       },
     },
     { $skip: skip },
