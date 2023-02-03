@@ -6,7 +6,7 @@ const getNoticeById = async (req, res) => {
   console.log(noticeId);
   const result = await Notice.findById(noticeId).populate(
     "owner",
-    "name email"
+    "email phone"
   );
   if (!result) {
     throw HttpError(404, "Not found");

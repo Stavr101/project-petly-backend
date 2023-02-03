@@ -33,7 +33,7 @@ app.use("/api/v1/services", servicesRouter);
 app.use("/api/v1/user", userRouter);
 
 app.use((req, res) => {
-  res.status(404).json({ message: "Not found" });
+  res.status(404).json({ message: "Bad request (invalid request body)" });
 });
 
 app.use((err, req, res, next) => {

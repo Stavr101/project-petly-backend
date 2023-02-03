@@ -35,10 +35,4 @@ router.post(
   ctrlWrapper(ctrl.addNotice)
 );
 
-// router.post(
-//   "/upload",
-//   authenticate,
-//   upload.single("petAvatar"),
-//   ctrlWrapper(ctrl.uploadPetAvatar)
-// );
 module.exports = router;
