@@ -13,7 +13,10 @@
   "consumes": ["application/json", "multipart/form-data"],
   "produces": ["application/json"],
   "servers": [
-    { "url": "https://project-petly-backend.onrender.com/api/v1" },
+    {
+      "url": "https://project-petly-backend.onrender.com/api/v1",
+      "description": "Production server"
+    },
     { "url": "http://localhost:4000/api/v1" }
   ],
   "tags": [
@@ -158,9 +161,17 @@
           "description": "Registration's object",
           "required": true,
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
                 "$ref": "#/components/schemas/AddNoticeRequest"
+              },
+              "encoding": {
+                "type": "object",
+                "properties": {
+                  "petAvatar": {
+                    "contentType": "image/png image/jpeg"
+                  }
+                }
               }
             }
           }
@@ -178,6 +189,10 @@
           },
           "400": {
             "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
             "content": {}
           },
           "409": {
@@ -219,6 +234,10 @@
             "description": "Bad request (invalid request body)",
             "content": {}
           },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
           "409": {
             "description": "Email in use",
             "content": {}
@@ -256,6 +275,10 @@
           },
           "400": {
             "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
             "content": {}
           },
           "409": {
@@ -376,33 +399,58 @@
       },
       "AddNoticeRequest": {
         "type": "object",
-        "required": ["name", "email", "password", "address", "phone"],
+        "required": [
+          "title",
+          "name",
+          "sex",
+          "birthdate",
+          "breed",
+          "location",
+          "petAvatar",
+          "comments",
+          "categoryName",
+          "price"
+        ],
         "properties": {
+          "title": {
+            "type": "String",
+            "description": "The main thing is about the animal pet",
+            "example": "Cute dog looking for a home"
+          },
           "name": {
             "type": "string",
-            "description": "User's name",
-            "example": "Arestovich"
+            "description": "Pet's name",
+            "example": "Rich"
           },
-          "email": {
+          "sex": {
             "type": "string",
-            "description": "User's email",
-            "format": "email"
+            "description": "Pet's sex",
+            "example": "male"
           },
-          "password": {
-            "type": "string",
-            "description": "User's password",
-            "example": "1234567"
+          "birthdate": {
+            "type": "date",
+            "description": "Pet's birthdate",
+            "example": "2020.09.2020"
           },
-
-          "address": {
+          "breed": {
             "type": "string",
-            "description": "User's loccation",
+            "description": "Breed's sex",
+            "example": "Pomeranian"
+          },
+          "petAvatar": {
+            "type": "file",
+            "description": "Pet owner's location",
+            "format": "binary"
+          },
+          "location": {
+            "type": "string",
+            "description": "Pet owner's location",
             "example": "Kyiv, Ukraine"
           },
-          "phone": {
+          "comments": {
             "type": "string",
-            "description": "User's phone number",
-            "example": "+380931111111"
+            "description": "Comments about pet",
+            "example": "Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet"
           }
         }
       },
