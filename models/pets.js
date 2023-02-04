@@ -3,7 +3,7 @@ const { Schema, model } = require("mongoose");
 const { handleMongooseError } = require("../helpers");
 
 const nameRegexp = /^[a-zA-Z]+$/;
-const dateRegexsp = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/
+const dateRegexp = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/
 
 const petSchema = new Schema(
     {
@@ -14,7 +14,7 @@ const petSchema = new Schema(
         },
         date: {
             type: String,
-            match: dateRegexsp,
+            match: dateRegexp,
             required: true,
         },
         breed: {
