@@ -5,10 +5,7 @@ const { validateBody, authenticate, upload } = require("../../middlewares");
 const { ctrlWrapper } = require("../../helpers");
 const router = express.Router();
 router.get("/category/:categoryName", ctrlWrapper(ctrl.getNoticesByCategory));
-router.get(
-  "/category/:categoryName/:noticeId",
-  ctrlWrapper(ctrl.getNoticeById)
-);
+router.get("/notice/:noticeId", ctrlWrapper(ctrl.getNoticeById));
 router.get("/own", authenticate, ctrlWrapper(ctrl.getOwnerNotices));
 router.delete(
   "/own/:noticeId",

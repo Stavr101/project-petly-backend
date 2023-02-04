@@ -15,6 +15,7 @@ const noticeShema = new Schema({
     match: nameRegexp,
     minlength: 2,
     maxlength: 16,
+    required: true,
   },
   sex: {
     type: String,
@@ -23,16 +24,19 @@ const noticeShema = new Schema({
   },
   birthdate: {
     type: Date,
+    required: true,
   },
   breed: {
     type: String,
     match: nameRegexp,
     minlength: 2,
     maxlength: 24,
+    required: true,
   },
   location: {
     match: addressRegexp,
     type: String,
+    required: true,
   },
   petAvatarURL: {
     type: String,
@@ -48,6 +52,7 @@ const noticeShema = new Schema({
     type: String,
     enum: ["sell", "lost-found", "for-free"],
     default: "sell",
+    required: true,
   },
   price: {
     type: Number,
