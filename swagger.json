@@ -391,7 +391,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AddNoticeResponse"
+                  "$ref": "#/components/schemas/GetNoticeByIdResponse"
                 }
               }
             }
@@ -418,12 +418,126 @@
         "parameters": [],
         "security": [{ "Bearer": [] }],
         "responses": {
-          "200": {
+          "201": {
             "description": "Successful operation",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AddNoticeResponse"
+                  "$ref": "#/components/schemas/GetUserResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "409": {
+            "description": "Email in use",
+            "content": {}
+          }
+        }
+      },
+      "post": {
+        "tags": ["User"],
+        "summary": "Add notice",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUserResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "409": {
+            "description": "Email in use",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "delete": {
+        "tags": ["User"],
+        "summary": "Add notice",
+        "parameters": [{ "in": "path", "name": "id" }],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "409": {
+            "description": "Email in use",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/user/{userId}": {
+      "put": {
+        "tags": ["User"],
+        "summary": "Add notice",
+        "parameters": [{ "in": "path", "name": "id" }],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "409": {
+            "description": "Email in use",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/user/pets": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Add notice",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUserResponse"
                 }
               }
             }
@@ -660,6 +774,73 @@
           "email": "1@gmail.com",
           "password": "1234567",
           "token": "string"
+        }
+      },
+      "GetNoticeByIdResponse": {
+        "example": {
+          "_id": "63dd5bb832ef9bc1e4613eba",
+          "title": "Cute dog looking for a home",
+          "name": "Baron",
+          "sex": "male",
+          "birthdate": "2020-11-24T22:00:00.000Z",
+          "breed": "Pomeranian",
+          "location": "Lviv",
+          "petAvatarURL": "https://res.cloudinary.com/dggq7qmr5/image/upload/v1675451320/petly_project/notices_pets_img/63dd5bb832ef9bc1e4613eba_Rectangle_24.jpg",
+          "comments": "Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet",
+          "categoryName": "sell",
+          "price": 100,
+          "owner": {
+            "_id": "63daccd2d32c76293ede191d",
+            "email": "example@mail.com",
+            "phone": "+380931111111"
+          },
+          "__v": 0
+        }
+      },
+
+      "GetUserResponse": {
+        "type": "object",
+        "properties": {
+          "avatarUrl": {
+            "type": "string",
+            "description": "User's avatarUrl",
+            "example": null
+          },
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "Arestovich"
+          },
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "description": "User's password",
+            "example": "1234567"
+          },
+
+          "address": {
+            "type": "string",
+            "description": "User's loccation",
+            "example": "Kyiv, Ukraine"
+          },
+          "phone": {
+            "type": "string",
+            "description": "User's phone number",
+            "example": "+380931111111"
+          }
+        },
+
+        "example": {
+          "avatarUrl": "avatar url",
+          "name": "Arestovich",
+          "email": "user@example.com",
+          "birthday": null,
+          "phone": "+380931111111",
+          "address": "Kyiv, Ukraine"
         }
       }
     },
