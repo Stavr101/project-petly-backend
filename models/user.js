@@ -8,6 +8,8 @@ const phoneRegexp = /^\+[1-9]{1}[0-9]{3,14}$/;
 const nameRegexp = /^[a-zA-Z]+$/;
 const addressRegexp = /[a-zA-Z]+, [a-zA-Z]+/i;
 const pwdRegexp = /^[\S]{7,32}$/;
+const bdayRegexp = /^(0?[1-9]|[12][0-9]|3[01])[\.\-](0?[1-9]|1[012])[\.\-]\d{4}$/
+
 
 const userSchema = new Schema(
   {
@@ -32,7 +34,8 @@ const userSchema = new Schema(
     },
     birthday: {
       type: String,
-      default: null,
+      match: bdayRegexp,
+      default: "01.01.2001",
     },
     phone: {
       type: String,
@@ -85,6 +88,13 @@ const loginSchema = Joi.object({
 const verifyEmailSchema = Joi.object({
   email: Joi.string().pattern(emailRegexp).required(),
 });
+const userSchemas = Joi.object({
+  name: Joi.string().pattern(nameRegexp).required(),
+  email: Joi.string().pattern(emailRegexp).required(),
+  password: Joi.string().min(7).max(32).required(),
+  address: Joi.string().pattern(addressRegexp).required(),
+  phone: Joi.string().pattern(phoneRegexp).required(),
+})
 
 const schemas = {
   registerSchema,
