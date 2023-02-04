@@ -17,6 +17,7 @@ const searchFilter = ({
         breed: 1,
         location: 1,
         petAvatarURL: 1,
+        price: 1,
       },
     },
     { $skip: skip },
@@ -32,7 +33,6 @@ const searchFilter = ({
   }
 
   if (favorite) {
-    console.log(favorite);
     filter.unshift({
       $match: {
         _id: { $in: favorite },

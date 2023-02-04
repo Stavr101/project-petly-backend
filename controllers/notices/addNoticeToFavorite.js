@@ -7,7 +7,7 @@ const addNoticeToFavorite = async (req, res) => {
   console.log(favoriteId);
   const { _id } = req.user;
   await User.updateOne({ _id }, { $addToSet: { favorite: favoriteId } });
-  res.json({ message: "add notice to favorite success" });
+  res.json({ message: "The notice has been added to favorites" });
 };
 
 module.exports = addNoticeToFavorite;

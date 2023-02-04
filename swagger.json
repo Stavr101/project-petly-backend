@@ -11,11 +11,10 @@
     }
   },
   "consumes": ["application/json", "multipart/form-data"],
-  "produces": ["application/json"],
+  "produces": ["application/json", "multipart/form-data"],
   "servers": [
     {
-      "url": "https://project-petly-backend.onrender.com/api/v1",
-      "description": "Production server"
+      "url": "https://project-petly-backend.onrender.com/api/v1"
     },
     { "url": "http://localhost:4000/api/v1" }
   ],
@@ -125,20 +124,10 @@
         "summary": "User logout",
         "parameters": [],
         "security": [{ "Bearer": [] }],
-        "requestBody": {
-          "description": "Registration's object",
-          "required": false
-        },
         "responses": {
           "200": {
             "description": "Logout success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LoginResponse"
-                }
-              }
-            }
+            "content": {}
           },
           "400": {
             "description": "Bad request (invalid request body)",
@@ -146,6 +135,10 @@
           },
           "401": {
             "description": "Unauthorized",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
             "content": {}
           }
         }
@@ -166,11 +159,9 @@
                 "$ref": "#/components/schemas/AddNoticeRequest"
               },
               "encoding": {
-                "type": "object",
-                "properties": {
-                  "petAvatar": {
-                    "contentType": "image/png image/jpeg"
-                  }
+                "petAvatar": {
+                  "contentType": "image/png, image/jpeg",
+                  "style": "form"
                 }
               }
             }
@@ -206,19 +197,8 @@
       "get": {
         "tags": ["Notice"],
         "summary": "Add notice",
-        "parameters": [],
+        "parameters": [{ "in": "query", "name": "search" }],
         "security": [{ "Bearer": [] }],
-        "requestBody": {
-          "description": "Registration's object",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddNoticeRequest"
-              }
-            }
-          }
-        },
         "responses": {
           "201": {
             "description": "Successful operation",
@@ -245,25 +225,200 @@
         }
       }
     },
+    "/notices/own/{noticeId}": {
+      "delete": {
+        "tags": ["Notice"],
+        "summary": "Add notice",
+        "parameters": [{ "in": "patj", "name": "noticeId" }],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Contact with id={noticeId} deleted",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "409": {
+            "description": "Email in use",
+            "content": {}
+          }
+        }
+      }
+    },
     "/notices/favorite": {
       "get": {
         "tags": ["Notice"],
         "summary": "Add notice",
-        "parameters": [],
+        "parameters": [{ "in": "query", "name": "search" }],
         "security": [{ "Bearer": [] }],
-        "requestBody": {
-          "description": "Registration's object",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddNoticeRequest"
-              }
-            }
-          }
-        },
         "responses": {
           "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddNoticeResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "409": {
+            "description": "Email in use",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/notices/favorite/{noticeId}": {
+      "patch": {
+        "tags": ["Notice"],
+        "summary": "Add notice",
+        "parameters": [{ "in": "path", "name": "noticeId" }],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "The notice has been added to favorites",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddNoticeResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "409": {
+            "description": "Email in use",
+            "content": {}
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Notice"],
+        "summary": "Add notice",
+        "parameters": [{ "in": "path", "name": "noticeId" }],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "The notice has been added to favorites",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddNoticeResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "409": {
+            "description": "Email in use",
+            "content": {}
+          }
+        }
+      }
+    },
+
+    "/notices/category/{categotyName}": {
+      "get": {
+        "tags": ["Notice"],
+        "summary": "get notices by category",
+        "parameters": [
+          { "in": "path", "name": "categotyName" },
+          { "in": "query", "name": "search" }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddNoticeResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "409": {
+            "description": "Email in use",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/notices/notice/{noticeId}": {
+      "get": {
+        "tags": ["Notice"],
+        "summary": "get notices by category adn",
+        "parameters": [{ "in": "path", "name": "noticeId" }],
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddNoticeResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "409": {
+            "description": "Email in use",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/user": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Add notice",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
             "description": "Successful operation",
             "content": {
               "application/json": {
@@ -344,8 +499,8 @@
         },
 
         "example": {
+          "name": "Arestivich",
           "email": "1@gmail.com",
-          "password": "1234567",
           "token": "string"
         }
       },
@@ -392,7 +547,7 @@
         "example": {
           "user": {
             "name": "Arestivich",
-            "password": "1234567"
+            "email": "user@example.com"
           },
           "token": "string"
         }
@@ -438,9 +593,10 @@
             "example": "Pomeranian"
           },
           "petAvatar": {
-            "type": "file",
+            "type": "string",
             "description": "Pet owner's location",
-            "format": "binary"
+            "format": "binary",
+            "nullable": true
           },
           "location": {
             "type": "string",
@@ -457,19 +613,46 @@
       "AddNoticeResponse": {
         "type": "object",
         "properties": {
-          "email": {
-            "type": "string",
-            "description": "User's email",
-            "format": "email"
+          "title": {
+            "type": "String",
+            "description": "The main thing is about the animal pet",
+            "example": "Cute dog looking for a home"
           },
-          "password": {
+          "name": {
             "type": "string",
-            "description": "User's password",
-            "example": "1234567"
+            "description": "Pet's name",
+            "example": "Rich"
           },
-          "token": {
+          "sex": {
             "type": "string",
-            "description": "JWT token"
+            "description": "Pet's sex",
+            "example": "male"
+          },
+          "birthdate": {
+            "type": "date",
+            "description": "Pet's birthdate",
+            "example": "2020.09.2020"
+          },
+          "breed": {
+            "type": "string",
+            "description": "Breed's sex",
+            "example": "Pomeranian"
+          },
+          "petAvatar": {
+            "type": "string",
+            "description": "Pet owner's location",
+            "format": "binary",
+            "nullable": true
+          },
+          "location": {
+            "type": "string",
+            "description": "Pet owner's location",
+            "example": "Kyiv, Ukraine"
+          },
+          "comments": {
+            "type": "string",
+            "description": "Comments about pet",
+            "example": "Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet"
           }
         },
 

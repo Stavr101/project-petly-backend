@@ -2,6 +2,7 @@ const { Notice } = require("../../models/notice");
 const { searchFilter } = require("../../helpers");
 const getOwnerNotices = async (req, res) => {
   const { _id: owner } = req.user;
+
   const { search, page, limit } = req.query;
   const categoryName = null;
 
