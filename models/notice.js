@@ -39,7 +39,7 @@ const noticeShema = new Schema({
     required: true,
   },
   petAvatarURL: {
-    type: String,
+    type: Object,
     required: true,
   },
   comments: {
