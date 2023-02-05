@@ -20,7 +20,7 @@ const noticeShema = new Schema({
   sex: {
     type: String,
     required: true,
-    enum: ["male", "female"],
+    enum: ["Male", "Female"],
   },
   birthdate: {
     type: Date,
