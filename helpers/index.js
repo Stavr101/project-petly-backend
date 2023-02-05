@@ -3,7 +3,8 @@ const ctrlWrapper = require("./ctrlWrapper");
 const handleMongooseError = require("./handleMongooseError");
 const sendEmail = require("./sendEmail");
 const searchFilter = require("./searchFilter");
-const uploadPetAvatar = require("./uploadPetAvatar");
+const cloudinaryUploadImage = require("./cloudinaryUploadImage");
+const cloudinaryRemoveImage = require("./cloudinaryRemoveImage");
 
 module.exports = {
   HttpError,
@@ -11,5 +12,6 @@ module.exports = {
   handleMongooseError,
   sendEmail,
   searchFilter,
-  uploadPetAvatar,
+  cloudinaryUploadImage,
+  cloudinaryRemoveImage,
 };

@@ -18,6 +18,7 @@ const searchFilter = ({
         location: 1,
         petAvatarURL: 1,
         price: 1,
+        // highlights: { $meta: "searchHighlights" },
       },
     },
     { $skip: skip },
@@ -48,6 +49,12 @@ const searchFilter = ({
         autocomplete: {
           query: search,
           path: "title",
+          tokenOrder: "sequential",
+          fuzzy: {
+            maxEdits: 1,
+            prefixLength: 1,
+            maxExpansions: 256,
+          },
         },
       },
     });
