@@ -19,7 +19,6 @@ const cloudinaryUploadImage = async ({ file, noticeId, folderName }) => {
     overwrite: true,
     folder: `petly_project/${folderName}`,
     filename_override: `${noticeId}_${originalname}`,
-    resource_type: image,
   };
 
   try {
