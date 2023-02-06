@@ -10,9 +10,9 @@ router.post("/", authenticate, ctrlWrapper(ctrl.addPet));
 
 router.get("/pets", authenticate, ctrlWrapper(ctrl.getAll));
 
-router.delete('/:id', authenticate, ctrlWrapper(ctrl.removePet));
+router.delete("/:id", authenticate, ctrlWrapper(ctrl.removePet));
 
 router.put("/:userId", authenticate, ctrlWrapper(ctrl.updateById));
-
+router.patch("/", authenticate, ctrlWrapper(ctrl.updateByParams));
 
 module.exports = router;
