@@ -1,13 +1,14 @@
 const getUser = async (req, res) => {
-    const { avatarURL, name, email, birthday, phone, address } = req.user;
+    const { avatarUrl, name, email, birthday, phone, address, _id } = req.user;
     
     res.json({
-        avatarUrl: avatarURL,
+        avatarUrl,
         name,
         email,
         birthday,
         phone,
         address,
+        _id,
     });
 };
 
