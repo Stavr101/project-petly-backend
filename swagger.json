@@ -224,7 +224,7 @@
       "delete": {
         "tags": ["Notice"],
         "summary": "delete owner's notice",
-        "parameters": [{ "in": "patj", "name": "noticeId" }],
+        "parameters": [{ "in": "path", "name": "noticeId" }],
         "security": [{ "Bearer": [] }],
         "responses": {
           "200": {

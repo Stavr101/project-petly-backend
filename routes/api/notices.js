@@ -1,6 +1,13 @@
 const express = require("express");
 const ctrl = require("../../controllers/notices");
-const { validateBody, authenticate, upload } = require("../../middlewares");
+const { schemas } = require("../../models/notice");
+
+const {
+  validateBody,
+  noticeValidateBody,
+  authenticate,
+  upload,
+} = require("../../middlewares");
 
 const { ctrlWrapper } = require("../../helpers");
 const router = express.Router();
@@ -29,6 +36,7 @@ router.post(
   "/",
   authenticate,
   upload.single("petAvatar"),
+  noticeValidateBody(schemas.addNoticeSchema),
   ctrlWrapper(ctrl.addNotice)
 );
 

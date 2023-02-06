@@ -1,6 +1,7 @@
 const nameRegexp = /^[a-zA-Z]+$/;
 const addressRegexp = /^[a-zA-Z]+(,\s[a-zA-Z]+)*$/;
-
+const Joi = require("joi");
+const { handleMongooseError } = require("../helpers");
 const { Schema, model } = require("mongoose");
 
 const noticeShema = new Schema({
@@ -20,7 +21,7 @@ const noticeShema = new Schema({
   sex: {
     type: String,
     required: true,
-    enum: ["Male", "Female"],
+    enum: ["male", "female"],
   },
   birthdate: {
     type: Date,
@@ -69,7 +70,31 @@ const noticeShema = new Schema({
   },
 });
 
+noticeShema.post("save", handleMongooseError);
+
+const addNoticeSchema = Joi.object({
+  title: Joi.string().required().min(2).max(48),
+  name: Joi.string().required().min(2).max(16).pattern(nameRegexp),
+  sex: Joi.string().required().valid("male", "female"),
+  birthdate: Joi.date().required(),
+  breed: Joi.string().required().min(2).max(24),
+  location: Joi.string().required().pattern(addressRegexp),
+  comments: Joi.string().required().min(8).max(120),
+  categoryName: Joi.string().required().valid("sell", "lost-found", "for-free"),
+  price: Joi.string()
+    .when("categoryName", {
+      is: "sell",
+      then: Joi.required(),
+    })
+    .min(1),
+});
+
+const schemas = {
+  addNoticeSchema,
+};
+
 const Notice = model("notice", noticeShema);
 module.exports = {
   Notice,
+  schemas,
 };
