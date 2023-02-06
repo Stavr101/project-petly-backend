@@ -192,7 +192,11 @@
       "get": {
         "tags": ["Notice"],
         "summary": "Get owner's notices",
-        "parameters": [{ "in": "query", "name": "search" }],
+        "parameters": [
+          { "in": "query", "name": "search" },
+          { "in": "query", "name": "page" },
+          { "in": "query", "name": "limit" }
+        ],
         "security": [{ "Bearer": [] }],
         "responses": {
           "200": {
@@ -250,7 +254,11 @@
       "get": {
         "tags": ["Notice"],
         "summary": "Get favorite notices",
-        "parameters": [{ "in": "query", "name": "search" }],
+        "parameters": [
+          { "in": "query", "name": "search" },
+          { "in": "query", "name": "page" },
+          { "in": "query", "name": "limit" }
+        ],
         "security": [{ "Bearer": [] }],
         "responses": {
           "201": {
@@ -323,7 +331,9 @@
         "summary": "Get notices by category",
         "parameters": [
           { "in": "path", "name": "categotyName" },
-          { "in": "query", "name": "search" }
+          { "in": "query", "name": "search" },
+          { "in": "query", "name": "page" },
+          { "in": "query", "name": "limit" }
         ],
         "responses": {
           "200": {
@@ -664,8 +674,7 @@
           "location",
           "petAvatar",
           "comments",
-          "categoryName",
-          "price"
+          "categoryName"
         ],
         "properties": {
           "title": {
@@ -718,7 +727,15 @@
             "description": "pet's cost",
             "example": 100
           }
-        }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": { "categoryName": { "const": "sell" } },
+              "required": ["price"]
+            }
+          }
+        ]
       },
       "AddNoticeResponse": {
         "type": "object",
