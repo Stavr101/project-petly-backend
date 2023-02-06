@@ -41,12 +41,14 @@ const register = async (req, res) => {
   });
 
   res.status(201).json({
-    name: newUser.name,
+    user: {
+      name: newUser.name,
     email: newUser.email,
     phone: newUser.phone,
     avatarUrl: newUser.avatarUrl,
     address: newUser.address,
     birthday: newUser.birthday,
+   }
 
     token,
   });
