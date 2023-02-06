@@ -48,6 +48,7 @@ const register = async (req, res) => {
       avatarUrl: newUser.avatarUrl,
       address: newUser.address,
       birthday: newUser.birthday,
+      _id: newUser._id,
     },
 
     token,
