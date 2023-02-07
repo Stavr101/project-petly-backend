@@ -5,6 +5,7 @@ const sendEmail = require("./sendEmail");
 const searchFilter = require("./searchFilter");
 const cloudinaryUploadImage = require("./cloudinaryUploadImage");
 const cloudinaryRemoveImage = require("./cloudinaryRemoveImage");
+const getavatarReq = require("./getavatarReq");
 
 module.exports = {
   HttpError,
@@ -14,4 +15,5 @@ module.exports = {
   searchFilter,
   cloudinaryUploadImage,
   cloudinaryRemoveImage,
+  getavatarReq,
 };

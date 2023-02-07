@@ -8,8 +8,8 @@ const phoneRegexp = /^\+[1-9]{1}[0-9]{3,14}$/;
 const nameRegexp = /^[a-zA-Z]+$/;
 const addressRegexp = /[a-zA-Z]+, [a-zA-Z]+/i;
 const pwdRegexp = /^[\S]{7,32}$/;
-const bdayRegexp = /^(0?[1-9]|[12][0-9]|3[01])[\.\-](0?[1-9]|1[012])[\.\-]\d{4}$/
-
+const bdayRegexp =
+  /^(0?[1-9]|[12][0-9]|3[01])[\.\-](0?[1-9]|1[012])[\.\-]\d{4}$/;
 
 const userSchema = new Schema(
   {
@@ -52,7 +52,7 @@ const userSchema = new Schema(
       default: [],
     },
     avatarUrl: {
-      type: String,
+      type: Object,
       required: true,
     },
     token: {
@@ -94,7 +94,7 @@ const userSchemas = Joi.object({
   password: Joi.string().min(7).max(32).required(),
   address: Joi.string().pattern(addressRegexp).required(),
   phone: Joi.string().pattern(phoneRegexp).required(),
-})
+});
 
 const schemas = {
   registerSchema,

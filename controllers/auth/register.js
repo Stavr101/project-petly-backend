@@ -22,7 +22,10 @@ const register = async (req, res) => {
 
   const hashPassword = await bcrypt.hash(password, 10);
 
-  const avatarUrl = gravatar.url(email);
+  const avatarUrl = {
+    secure_url: gravatar.url(email),
+    public_id: null,
+  };
 
   const verificationToken = nanoid();
   const payload = {

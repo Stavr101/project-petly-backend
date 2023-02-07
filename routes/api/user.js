@@ -1,6 +1,12 @@
 const express = require("express");
 const ctrl = require("../../controllers/user");
-const { validateBody, isValidId, authenticate } = require("../../middlewares");
+
+const {
+  validateBody,
+  isValidId,
+  authenticate,
+  upload,
+} = require("../../middlewares");
 const { ctrlWrapper } = require("../../helpers");
 const router = express.Router();
 
@@ -14,5 +20,11 @@ router.delete("/:id", authenticate, ctrlWrapper(ctrl.removePet));
 
 router.put("/:userId", authenticate, ctrlWrapper(ctrl.updateById));
 router.patch("/", authenticate, ctrlWrapper(ctrl.updateByParams));
+router.patch(
+  "/avatar",
+  authenticate,
+  upload.single("userAvatar"),
+  ctrlWrapper(ctrl.updateUserAvatar)
+);
 
 module.exports = router;
