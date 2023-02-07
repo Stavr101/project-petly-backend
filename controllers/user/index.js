@@ -4,6 +4,7 @@ const getAll = require("./getAll");
 const removePet = require("./removePet");
 const updateById = require("./updateById");
 const updateByParams = require("./updateByParams");
+const updateUserAvatar = require("./updateUserAvatar");
 module.exports = {
   getUser,
   addPet,
@@ -11,4 +12,5 @@ module.exports = {
   removePet,
   updateById,
   updateByParams,
+  updateUserAvatar,
 };
