@@ -5,6 +5,7 @@ const { ObjectId } = require("mongodb");
 const addPet = async (req, res) => {
   const { _id: owner } = req.user;
   const file = req.file;
+  console.log(req.body)
   const petId = ObjectId();
   const { secure_url, public_id } = await cloudinaryUploadImage({
     file,
