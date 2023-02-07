@@ -4,7 +4,6 @@ const { getavatarReq } = require("../../helpers");
 const updateUserAvatar = async (req, res) => {
   const file = req.file;
   const { _id } = req.user;
-  console.log("user id", _id);
 
   newAvatarUrl = await getavatarReq({
     file,
