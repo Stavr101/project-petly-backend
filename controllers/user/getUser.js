@@ -9,6 +9,7 @@ const getUser = async (req, res) => {
         phone,
         address,
         _id,
+        favorite,
     });
 };
 

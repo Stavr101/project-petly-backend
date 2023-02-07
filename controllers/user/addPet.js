@@ -4,14 +4,14 @@ const { ObjectId } = require("mongodb");
 
 const addPet = async (req, res) => {
   const { _id: owner } = req.user;
-  const {avatarUrl} = req.body;
+  const file = req.file;
   const petId = ObjectId();
   const { secure_url, public_id } = await cloudinaryUploadImage({
-    avatarUrl,
+    file,
     petId,
     folderName: "user_pets_img",
   });
-    const newAvatarUrl = {
+    const avatarUrl = {
       secure_url,
       public_id,
     };
@@ -19,7 +19,7 @@ const addPet = async (req, res) => {
     ...req.body,
     _id: petId,
     owner,
-    avatarUrl: newAvatarUrl,
+    avatarUrl
   });
 
   res.status(201).json(result);
