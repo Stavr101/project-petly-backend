@@ -14,7 +14,7 @@ const petSchema = new Schema(
         },
         date: {
             type: String,
-            match: dateRegexp,
+            // match: dateRegexp,
             required: true,
         },
         breed: {
@@ -23,7 +23,7 @@ const petSchema = new Schema(
             required: true,
         },
         avatarUrl: {
-            type: String,
+            type: Object,
             default: false,
         },
         comment: {

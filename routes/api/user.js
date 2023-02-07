@@ -12,7 +12,12 @@ const router = express.Router();
 
 router.get("/", authenticate, ctrlWrapper(ctrl.getUser));
 
-router.post("/", authenticate, ctrlWrapper(ctrl.addPet));
+router.post(
+  "/",
+  authenticate,
+  upload.single("avatarUrl"),
+  ctrlWrapper(ctrl.addPet)
+);
 
 router.get("/pets", authenticate, ctrlWrapper(ctrl.getAll));
 
