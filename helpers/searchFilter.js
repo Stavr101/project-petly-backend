@@ -18,6 +18,7 @@ const searchFilter = ({
         location: 1,
         petAvatarURL: 1,
         price: 1,
+        owner:1,
         // highlights: { $meta: "searchHighlights" },
       },
     },
