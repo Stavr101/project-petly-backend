@@ -695,7 +695,7 @@
           "birthdate": {
             "type": "date",
             "description": "Pet's birthdate",
-            "example": "2020.09.2020"
+            "example": "2020.09.20"
           },
           "breed": {
             "type": "string",
