@@ -14,18 +14,6 @@ const addNotice = async (req, res) => {
     folderName: "notices_pets_img",
   });
 
-  // const getavatar = async () => {
-  //   const { secure_url, public_id } = await cloudinaryUploadImage({
-  //     file,
-  //     noticeId,
-  //     folderName: "notices_pets_img",
-  //   });
-  //   return {
-  //     secure_url,
-  //     public_id,
-  //   };
-  // };
-
   const result = await Notice.create({
     ...req.body,
     _id: noticeId,
