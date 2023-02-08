@@ -438,6 +438,44 @@
         }
       }
     },
+    "/user/avatar": {
+      "patch": {
+        "tags": ["User"],
+        "summary": "Update user avatar",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Registration's object",
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserAvatarRequest"
+              },
+              "encoding": {
+                "userAvatar": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User avatar is updated successfully",
+            "content": {}
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          }
+        }
+      }
+    },
     "/user/{id}": {
       "delete": {
         "tags": ["User"],
@@ -512,6 +550,7 @@
         }
       }
     },
+
     "/services": {
       "get": {
         "tags": ["Services"],
@@ -921,6 +960,17 @@
             "type": "string",
             "description": "Comments about pet",
             "example": "Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet"
+          }
+        }
+      },
+      "UpdateUserAvatarRequest": {
+        "type": "object",
+        "required": ["userAvatar"],
+        "properties": {
+          "userAvatar": {
+            "type": "string",
+            "description": "User avatar",
+            "format": "binary"
           }
         }
       }
