@@ -6,6 +6,7 @@ const searchFilter = require("./searchFilter");
 const cloudinaryUploadImage = require("./cloudinaryUploadImage");
 const cloudinaryRemoveImage = require("./cloudinaryRemoveImage");
 const getavatarReq = require("./getavatarReq");
+const addFavotiteField = require("./addFavotiteField");
 
 module.exports = {
   HttpError,
@@ -16,4 +17,5 @@ module.exports = {
   cloudinaryUploadImage,
   cloudinaryRemoveImage,
   getavatarReq,
+  addFavotiteField,
 };
