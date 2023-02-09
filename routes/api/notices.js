@@ -12,8 +12,11 @@ const {
 const { ctrlWrapper } = require("../../helpers");
 const router = express.Router();
 router.get("/category/:categoryName", ctrlWrapper(ctrl.getNoticesByCategory));
+
 router.get("/notice/:noticeId", ctrlWrapper(ctrl.getNoticeById));
+
 router.get("/own", authenticate, ctrlWrapper(ctrl.getOwnerNotices));
+
 router.delete(
   "/own/:noticeId",
   authenticate,
@@ -21,6 +24,7 @@ router.delete(
 );
 
 router.get("/favorite", authenticate, ctrlWrapper(ctrl.getFavoriteNotices));
+
 router.patch(
   "/favorite/:noticeId",
   authenticate,

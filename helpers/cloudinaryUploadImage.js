@@ -2,8 +2,6 @@ const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
 const fs = require("fs/promises");
 
-// fs.unlink(path, callback);
-
 cloudinary.config({
   secure: true,
 });

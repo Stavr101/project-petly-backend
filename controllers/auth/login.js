@@ -20,9 +20,7 @@ const login = async (req, res) => {
   if (!passwordCompare) {
     throw HttpError(401, "Email or password inwalid");
   }
-  if (!user.verify) {
-    throw HttpError(400, "Email not verify");
-  }
+
   const payload = {
     id: user._id,
   };

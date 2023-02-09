@@ -24,7 +24,7 @@ const googleCallback = async (
     const { email, displayName } = profile;
     const user = await User.findOne({ email });
     if (user) {
-      done(null, user); // req.user=user
+      done(null, user);
     }
     const password = nanoid();
     const hashPassword = await bcrypt.hash(password, 10);
