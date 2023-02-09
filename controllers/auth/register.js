@@ -2,7 +2,6 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { ObjectId } = require("mongodb");
 const gravatar = require("gravatar");
-const { nanoid } = require("nanoid");
 const { User } = require("../../models/user");
 const { HttpError } = require("../../helpers");
 
@@ -11,7 +10,6 @@ require("dotenv").config();
 const register = async (req, res) => {
   const { email, password } = req.body;
   const { SECRET_KEY } = process.env;
-  const file = req.file;
   const userId = ObjectId();
 
   const user = await User.findOne({ email });
@@ -27,7 +25,6 @@ const register = async (req, res) => {
     public_id: null,
   };
 
-  const verificationToken = nanoid();
   const payload = {
     id: userId,
   };
@@ -40,7 +37,6 @@ const register = async (req, res) => {
     token,
     password: hashPassword,
     avatarUrl,
-    verificationToken,
   });
 
   res.status(201).json({
