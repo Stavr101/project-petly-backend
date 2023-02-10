@@ -2,12 +2,14 @@ const cloudinary = require("cloudinary").v2;
 require("dotenv").config();
 
 cloudinary.config({
-  secure: true,
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KAY,
+  api_secret: process.env.CLOUDINARY_API_SECRET_KEY,
 });
 
-const cloudinaryRemoveImage = async (public_id) => {
+const cloudinaryRemoveImage = (public_id) => {
   try {
-    await cloudinary.uploader.destroy(public_id);
+    cloudinary.uploader.destroy(public_id);
   } catch (error) {
     console.error(error);
   }

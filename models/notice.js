@@ -13,7 +13,6 @@ const noticeShema = new Schema({
   },
   name: {
     type: String,
-    match: nameRegexp,
     minlength: 2,
     maxlength: 16,
     required: true,
@@ -29,7 +28,6 @@ const noticeShema = new Schema({
   },
   breed: {
     type: String,
-    match: nameRegexp,
     minlength: 2,
     maxlength: 24,
     required: true,
@@ -74,7 +72,7 @@ noticeShema.post("save", handleMongooseError);
 
 const addNoticeSchema = Joi.object({
   title: Joi.string().required().min(2).max(48),
-  name: Joi.string().required().min(2).max(16).pattern(nameRegexp),
+  name: Joi.string().required().min(2).max(16),
   sex: Joi.string().required().valid("male", "female"),
   birthdate: Joi.date().required(),
   breed: Joi.string().required().min(2).max(24),
