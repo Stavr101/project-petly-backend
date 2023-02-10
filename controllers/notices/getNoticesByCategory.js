@@ -1,5 +1,6 @@
 const { Notice } = require("../../models/notice");
 const { User } = require("../../models/user");
+const { HttpError } = require("../../helpers");
 const { searchFilter, addFavotiteField } = require("../../helpers");
 const jwt = require("jsonwebtoken");
 
@@ -9,16 +10,17 @@ const getNoticesByCategory = async (req, res, next) => {
   const { categoryName } = req.params;
   const { search, page, limit } = req.query;
   const { authorization } = req.headers;
-  const [bearer, token] = authorization.split(" ");
 
   const filter = searchFilter({ categoryName, search, page, limit });
 
   const agrr = await Notice.aggregate(filter);
 
-  if (token && bearer) {
+  if (authorization) {
     try {
+      const [bearer, token] = authorization.split(" ");
       const { id } = jwt.verify(token, SECRET_KEY);
       const user = await User.findById(id);
+
       if (!user || !user.token) {
         next(HttpError(401));
       }
