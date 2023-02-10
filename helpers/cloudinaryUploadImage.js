@@ -3,7 +3,9 @@ require("dotenv").config();
 const fs = require("fs/promises");
 
 cloudinary.config({
-  secure: true,
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KAY,
+  api_secret: process.env.CLOUDINARY_API_SECRET_KEY,
 });
 
 const cloudinaryUploadImage = async ({ file, id, folderName }) => {
