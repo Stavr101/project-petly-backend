@@ -11,16 +11,20 @@ const updateUserAvatar = async (req, res) => {
     folderName: "user_avatars_img",
   });
 
-  const result = await User.updateOne(
-    { _id },
+  const result = await User.findByIdAndUpdate(
+    _id,
+    { avatarUrl: newAvatarUrl },
     {
-      $set: { avatarUrl: newAvatarUrl },
+      new: true,
     }
   );
   if (!result) {
     throw HttpError(404, "Not found");
   }
-  res.json({ message: `User avatar is updated successfully` });
+  res.json({
+    avatarUrl: newAvatarUrl,
+    message: `User avatar is updated successfully`,
+  });
 };
 
 module.exports = updateUserAvatar;
