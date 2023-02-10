@@ -8,6 +8,7 @@ const searchFilter = ({
 }) => {
   const skip = (page - 1) * limit;
   const filter = [
+    { $sort: { createdAt: -1 } },
     {
       $project: {
         title: 1,
