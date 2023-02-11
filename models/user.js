@@ -25,9 +25,7 @@ const userSchema = new Schema(
       required: [true, "Email is required"],
     },
     password: {
-      type: String,
-      match: pwdRegexp,
-      minlength: 7,
+      type: String,    
       required: true,
     },
     birthday: {
@@ -66,19 +64,19 @@ userSchema.post("save", handleMongooseError);
 const registerSchema = Joi.object({
   name: Joi.string().pattern(nameRegexp).required(),
   email: Joi.string().pattern(emailRegexp).required(),
-  password: Joi.string().pattern(pwdRegexp).min(7).max(32).required(),
+  password: Joi.string().pattern(pwdRegexp).required(),
   address: Joi.string().pattern(addressRegexp).required(),
   phone: Joi.string().pattern(phoneRegexp).required(),
 });
 const loginSchema = Joi.object({
   email: Joi.string().pattern(emailRegexp).required(),
-  password: Joi.string().pattern(pwdRegexp).min(7).required(),
+  password: Joi.string().pattern(pwdRegexp).required(),
 });
 
 const userJoiSchema = Joi.object({
   name: Joi.string().pattern(nameRegexp).required(),
   email: Joi.string().pattern(emailRegexp).required(),
-  password: Joi.string().pattern(pwdRegexp).min(7).max(32).required(),
+  password: Joi.string().pattern(pwdRegexp).required(),
   address: Joi.string().pattern(addressRegexp).required(),
   phone: Joi.string().pattern(phoneRegexp).required(),
 });
