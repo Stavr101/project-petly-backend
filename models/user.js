@@ -5,7 +5,7 @@ const emailRegexp = /^(?=.{10,63}$)([A-Za-z0-9._-]{2,}@[A-Za-z0-9._-]{2,})$/;
 const phoneRegexp = /^\+380\d{9}$/;
 const nameRegexp = /^[a-zA-Z]+$/;
 const addressRegexp = /[a-zA-Z]+, [a-zA-Z]+/i;
-const pwdRegexp = /^(?=.{7,32}$)([A-Za-z0-9]+)$/;
+const pwdRegexp = /^[\S]{7,32}$/;
 const bdayRegexp =
   /^(0?[1-9]|[12][0-9]|3[01])[\.\-](0?[1-9]|1[012])[\.\-]\d{4}$/;
 
