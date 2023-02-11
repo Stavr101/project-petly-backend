@@ -39,6 +39,8 @@ const register = async (req, res) => {
     avatarUrl,
   });
 
+  console.log(newUser)
+
   res.status(201).json({
     user: {
       name: newUser.name,
