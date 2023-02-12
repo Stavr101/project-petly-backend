@@ -2,42 +2,43 @@ const Joi = require("joi");
 const { Schema, model } = require("mongoose");
 const { handleMongooseError } = require("../helpers");
 
-const nameRegexp = /^[a-zA-Z]+$/;
-const dateRegexp = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/
+const nameRegexp = /^([A-Za-zА-Яа-я\-\s]{2,16})?$/;
+const dateRegexp =
+  /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
 
 const petSchema = new Schema(
-    {
-        name: {
-            type: String,
-            match: nameRegexp,
-            required: true,
-        },
-        date: {
-            type: String,
-            // match: dateRegexp,
-            required: true,
-        },
-        breed: {
-            type: String,
-            match: nameRegexp,
-            required: true,
-        },
-        avatarUrl: {
-            type: Object,
-            default: false,
-        },
-        comment: {
-            type: String,
-            min: 2,
-            required: true,
-        },
-        owner: {
-            type: Schema.Types.ObjectId,
-            ref: "user",
-            required: true,
-        },
+  {
+    name: {
+      type: String,
+      match: nameRegexp,
+      required: true,
     },
-    { versionKey: false, timestamps: true }
+    date: {
+      type: String,
+      // match: dateRegexp,
+      required: true,
+    },
+    breed: {
+      type: String,
+      match: nameRegexp,
+      required: true,
+    },
+    avatarUrl: {
+      type: Object,
+      default: false,
+    },
+    comment: {
+      type: String,
+      min: 2,
+      required: true,
+    },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      required: true,
+    },
+  },
+  { versionKey: false, timestamps: true }
 );
 
 petSchema.post("save", handleMongooseError);

@@ -1,5 +1,5 @@
 const nameRegexp = /^[a-zA-Z]+$/;
-const addressRegexp = /^[a-zA-Z]+(,\s[a-zA-Z]+)*$/;
+const addressRegexp = /^$|^([A-Za-zА-Яа-я]+),\s([A-Za-zА-Яа-я]+)?$/;
 const Joi = require("joi");
 const { handleMongooseError } = require("../helpers");
 const { Schema, model } = require("mongoose");

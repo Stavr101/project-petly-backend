@@ -18,7 +18,10 @@ const addNoticeToFavorite = async (req, res) => {
   if (oldFavorite.length === favorite.length) {
     throw HttpError(409, `Notice with id:${noticeId} is already added`);
   }
-  res.json({ message: "The notice has been added to favorites" });
+  res.json({
+    favorite: favorite,
+    message: "The notice has been added to favorites",
+  });
 };
 
 module.exports = addNoticeToFavorite;
