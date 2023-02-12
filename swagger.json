@@ -578,28 +578,6 @@
         }
       }
     },
-    "/user/{userId}": {
-      "put": {
-        "tags": ["User"],
-        "summary": "Change user's data",
-        "parameters": [{ "in": "path", "name": "id" }],
-        "security": [{ "Bearer": [] }],
-        "responses": {
-          "201": {
-            "description": "Successful operation",
-            "content": {}
-          },
-          "400": {
-            "description": "Bad request (invalid request body)",
-            "content": {}
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {}
-          }
-        }
-      }
-    },
     "/user/pets": {
       "get": {
         "tags": ["User"],
