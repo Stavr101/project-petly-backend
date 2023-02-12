@@ -25,19 +25,23 @@
     },
     {
       "name": "User",
-      "description": "Authorization endpoints"
+      "description": "User endpoints"
+    },
+    {
+      "name": "Pet",
+      "description": "User's pet endpoints"
     },
     {
       "name": "Notice",
-      "description": "Authorization endpoints"
+      "description": "Notice endpoints"
     },
     {
       "name": "News",
-      "description": "Authorization endpoints"
+      "description": "News endpoints"
     },
     {
       "name": "Services",
-      "description": "Authorization endpoints"
+      "description": "Services endpoints"
     }
   ],
 
@@ -97,7 +101,7 @@
           }
         },
         "responses": {
-          "201": {
+          "200": {
             "description": "Successful operation",
             "content": {
               "application/json": {
@@ -291,7 +295,13 @@
         "responses": {
           "200": {
             "description": "The notice has been added to favorites",
-            "content": {}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddNoticeToFavoriteResponse"
+                }
+              }
+            }
           },
           "400": {
             "description": "Bad request (invalid request body)",
@@ -299,6 +309,10 @@
           },
           "401": {
             "description": "Unauthorized",
+            "content": {}
+          },
+          "409": {
+            "description": "Notice with 'notice id' is already added",
             "content": {}
           }
         }
@@ -391,7 +405,7 @@
         "parameters": [],
         "security": [{ "Bearer": [] }],
         "responses": {
-          "201": {
+          "200": {
             "description": "Successful operation",
             "content": {
               "application/json": {
@@ -416,6 +430,64 @@
         "summary": "Add user's pet",
         "parameters": [],
         "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Registration's object",
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/AddPetRequest"
+              },
+              "encoding": {
+                "avatarUrl": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddPetResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          }
+        }
+      },
+      "patch": {
+        "tags": ["User"],
+        "summary": "Change user params",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Registration's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeUserParamsRequest"
+              },
+              "encoding": {
+                "avatarUrl": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "201": {
             "description": "Successful operation",
@@ -632,26 +704,60 @@
       "RegistrationResponse": {
         "type": "object",
         "properties": {
-          "email": {
-            "type": "string",
-            "description": "User's email",
-            "format": "email"
-          },
-          "password": {
-            "type": "string",
-            "description": "User's password",
-            "example": "1234567"
+          "user": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "User's name",
+                "example": "Arestovich"
+              },
+              "email": {
+                "type": "string",
+                "description": "User's email",
+                "format": "email"
+              },
+              "phone": {
+                "type": "string",
+                "description": "User's phone",
+                "example": "1234567"
+              },
+              "avatarUrl": {
+                "type": "object",
+                "properties": {
+                  "secure_url": {
+                    "type": "string",
+                    "description": "User's avatar url",
+                    "example": "//www.gravatar.com/avatar/b58996c504c5638798eb6b511e6f49af"
+                  },
+                  "public_id": {
+                    "type": "string",
+                    "description": "User avatar's id",
+                    "example": null
+                  }
+                }
+              },
+              "address": {
+                "type": "string",
+                "description": "User's location",
+                "example": "Kyiv, Ukraine"
+              },
+              "birthday": {
+                "type": "string",
+                "description": "User's birthday",
+                "example": "01.01.2001"
+              },
+              "_id": {
+                "type": "string",
+                "description": "User's id",
+                "example": "string"
+              }
+            }
           },
           "token": {
             "type": "string",
             "description": "JWT token"
           }
-        },
-
-        "example": {
-          "name": "Arestivich",
-          "email": "1@gmail.com",
-          "token": "string"
         }
       },
       "LoginRequest": {
@@ -678,13 +784,33 @@
             "properties": {
               "name": {
                 "type": "string",
-                "description": "User's email",
+                "description": "User's name",
                 "example": "Arestovich"
               },
-              "password": {
+              "email": {
                 "type": "string",
-                "description": "User's password",
+                "description": "User's email",
+                "format": "email"
+              },
+              "address": {
+                "type": "string",
+                "description": "User's location",
+                "example": "Kyiv, Ukraine"
+              },
+              "phone": {
+                "type": "string",
+                "description": "User's phone",
                 "example": "1234567"
+              },
+              "_id": {
+                "type": "string",
+                "description": "User's id",
+                "example": "string"
+              },
+              "birthday": {
+                "type": "string",
+                "description": "User's birthday",
+                "example": "01.01.2001"
               }
             }
           },
@@ -692,14 +818,6 @@
             "type": "string",
             "description": "JWT token"
           }
-        },
-
-        "example": {
-          "user": {
-            "name": "Arestivich",
-            "email": "user@example.com"
-          },
-          "token": "string"
         }
       },
       "AddNoticeRequest": {
@@ -804,16 +922,26 @@
             "description": "Breed's sex",
             "example": "Pomeranian"
           },
-          "petAvatar": {
-            "type": "string",
-            "description": "Pet owner's location",
-            "format": "binary",
-            "nullable": true
-          },
+
           "location": {
             "type": "string",
             "description": "Pet owner's location",
             "example": "Kyiv, Ukraine"
+          },
+          "petAvatarURL": {
+            "type": "object",
+            "properties": {
+              "secure_url": {
+                "type": "string",
+                "description": "User's avatar url",
+                "example": "//www.gravatar.com/avatar/b58996c504c5638798eb6b511e6f49af"
+              },
+              "public_id": {
+                "type": "string",
+                "description": "User avatar's id",
+                "example": null
+              }
+            }
           },
           "comments": {
             "type": "string",
@@ -829,61 +957,192 @@
             "type": "integer",
             "description": "pet's cost",
             "example": 100
+          },
+          "owner": {
+            "type": "string",
+            "description": "Notice's owner",
+            "example": "String"
+          },
+          "_id": {
+            "type": "string",
+            "description": "Notice's id",
+            "example": "String"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Notice's create date",
+            "example": "2023-02-12T14:49:43.482Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Notice's update date",
+            "example": "2023-02-12T14:49:43.482Z"
           }
-        },
-
-        "example": [
-          {
-            "title": "Cute dog looking for a home",
-            "name": "Baron",
-            "sex": "male",
-            "birthdate": "2020-11-24T22:00:00.000Z",
-            "breed": "Pomeranian",
-            "location": "Lviv",
-            "petAvatarURL": "https://res.cloudinary.com/dggq7qmr5/image/upload/v1675521654/petly_project/notices_pets_img/63de6e74376dc20e8b0b91a7_Rectangle_26.jpg",
-            "comments": "Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet",
-            "categoryName": "sell",
-            "price": 100,
-            "owner": "63daccd2d32c76293ede191d",
-            "_id": "63de6e74376dc20e8b0b91a7",
-            "__v": 0
-          }
-        ]
+        }
       },
       "GetNoticeByCategory": {
-        "example": [
-          {
-            "_id": "63de1abb66f4e9e95d1f87e9",
-            "title": "Cute dog looking for a home",
-            "name": "Baron",
-            "birthdate": "2020-11-24T22:00:00.000Z",
-            "breed": "Pomeranian",
-            "location": "Lviv, Ukraine",
-            "petAvatarURL": "https://res.cloudinary.com/dggq7qmr5/image/upload/v1675500220/petly_project/notices_pets_img/63de1abb66f4e9e95d1f87e9_Rectangle_31.jpg",
-            "categoryName": "sell",
-            "price": 100
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "String",
+            "description": "notice's id",
+            "example": "String"
+          },
+          "title": {
+            "type": "String",
+            "description": "The main thing is about the animal pet",
+            "example": "Cute dog looking for a home"
+          },
+          "name": {
+            "type": "string",
+            "description": "Pet's name",
+            "example": "Rich"
+          },
+          "birthdate": {
+            "type": "date",
+            "description": "Pet's birthdate",
+            "example": "2020.09.20"
+          },
+          "breed": {
+            "type": "string",
+            "description": "Breed's sex",
+            "example": "Pomeranian"
+          },
+          "location": {
+            "type": "string",
+            "description": "Pet owner's location",
+            "example": "Kyiv, Ukraine"
+          },
+          "petAvatarURL": {
+            "type": "object",
+            "properties": {
+              "secure_url": {
+                "type": "string",
+                "description": "User's avatar url",
+                "example": "//www.gravatar.com/avatar/b58996c504c5638798eb6b511e6f49af"
+              },
+              "public_id": {
+                "type": "string",
+                "description": "User avatar's id",
+                "example": null
+              }
+            }
+          },
+          "categoryName": {
+            "type": "string",
+            "description": "Notice's category",
+            "example": "sell"
+          },
+          "price": {
+            "type": "integer",
+            "description": "pet's cost",
+            "example": 100
+          },
+          "owner": {
+            "type": "string",
+            "description": "notice's owner",
+            "example": "String"
           }
-        ]
+        }
       },
       "GetNoticeByIdResponse": {
-        "example": {
-          "_id": "63dd5bb832ef9bc1e4613eba",
-          "title": "Cute dog looking for a home",
-          "name": "Baron",
-          "sex": "male",
-          "birthdate": "2020-11-24T22:00:00.000Z",
-          "breed": "Pomeranian",
-          "location": "Lviv",
-          "petAvatarURL": "https://res.cloudinary.com/dggq7qmr5/image/upload/v1675451320/petly_project/notices_pets_img/63dd5bb832ef9bc1e4613eba_Rectangle_24.jpg",
-          "comments": "Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet",
-          "categoryName": "sell",
-          "price": 100,
-          "owner": {
-            "_id": "63daccd2d32c76293ede191d",
-            "email": "example@mail.com",
-            "phone": "+380931111111"
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "String",
+            "description": "notice's id",
+            "example": "String"
           },
-          "__v": 0
+          "title": {
+            "type": "String",
+            "description": "The main thing is about the animal pet",
+            "example": "Cute dog looking for a home"
+          },
+          "name": {
+            "type": "string",
+            "description": "Pet's name",
+            "example": "Rich"
+          },
+          "sex": {
+            "type": "string",
+            "description": "Pet's sex",
+            "example": "male"
+          },
+          "birthdate": {
+            "type": "date",
+            "description": "Pet's birthdate",
+            "example": "2020.09.20"
+          },
+          "breed": {
+            "type": "string",
+            "description": "Breed's sex",
+            "example": "Pomeranian"
+          },
+          "location": {
+            "type": "string",
+            "description": "Pet owner's location",
+            "example": "Kyiv, Ukraine"
+          },
+          "petAvatarURL": {
+            "type": "object",
+            "properties": {
+              "secure_url": {
+                "type": "string",
+                "description": "User's avatar url",
+                "example": "https://res.cloudinary.com/dggq7qmr5/image/upload/v1676213383/petly_project/notices_pets_img/63e8fc8605bb4ffa8102e2c5.jpg"
+              },
+              "public_id": {
+                "type": "string",
+                "description": "User avatar's id",
+                "example": "String"
+              }
+            }
+          },
+          "comments": {
+            "type": "string",
+            "description": "comment about pet",
+            "example": "string"
+          },
+          "categoryName": {
+            "type": "string",
+            "description": "Notice's category",
+            "example": "sell"
+          },
+          "price": {
+            "type": "integer",
+            "description": "pet's cost",
+            "example": 100
+          },
+          "owner": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string",
+                "description": "Owner's id",
+                "example": "string"
+              },
+              "name": {
+                "type": "string",
+                "description": "Owner's name",
+                "example": "Arestovich"
+              },
+              "email": {
+                "type": "string",
+                "description": "Owner's email",
+                "format": "email"
+              }
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Notice's create date",
+            "example": "2023-02-12T14:49:43.482Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Notice's update date",
+            "example": "2023-02-12T14:49:43.482Z"
+          }
         }
       },
 
@@ -891,9 +1150,19 @@
         "type": "object",
         "properties": {
           "avatarUrl": {
-            "type": "string",
-            "description": "User's avatarUrl",
-            "example": null
+            "type": "object",
+            "properties": {
+              "secure_url": {
+                "type": "string",
+                "description": "User avatar's URL",
+                "example": "String"
+              },
+              "public_id": {
+                "type": "string",
+                "description": "User avatar's id",
+                "example": "String"
+              }
+            }
           },
           "name": {
             "type": "string",
@@ -905,36 +1174,93 @@
             "description": "User's email",
             "format": "email"
           },
-          "password": {
+          "birthday": {
             "type": "string",
-            "description": "User's password",
-            "example": "1234567"
-          },
-
-          "address": {
-            "type": "string",
-            "description": "User's loccation",
-            "example": "Kyiv, Ukraine"
+            "description": "User's birthday",
+            "example": "01.01.2001"
           },
           "phone": {
             "type": "string",
             "description": "User's phone number",
             "example": "+380931111111"
+          },
+          "address": {
+            "type": "string",
+            "description": "User's loccation",
+            "example": "Kyiv, Ukraine"
+          },
+          "_id": {
+            "type": "string",
+            "description": "User's id",
+            "example": "string"
+          },
+          "favorite": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
-        },
-
-        "example": {
-          "avatarUrl": "avatar url",
-          "name": "Arestovich",
-          "email": "user@example.com",
-          "birthday": null,
-          "phone": "+380931111111",
-          "address": "Kyiv, Ukraine"
         }
       },
+      "ChangeUserParamsRequest": {
+        "type": "object",
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "User's name",
+                "example": "Arestovich"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "email": {
+                "type": "string",
+                "description": "User's name",
+                "example": "Arestovich"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "birthday": {
+                "type": "string",
+                "description": "User's birthday",
+                "example": "01.01.2001"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "phone": {
+                "type": "string",
+                "description": "User's phone number",
+                "example": "+380931111111"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "address": {
+                "type": "string",
+                "description": "User's loccation",
+                "example": "Kyiv, Ukraine"
+              }
+            }
+          }
+        ]
+      },
+
       "AddPetRequest": {
         "type": "object",
-        "required": ["name", "date", "breed", "petAvatar", "comment"],
+        "required": ["name", "date", "breed", "avatarUrl", "comment"],
         "properties": {
           "name": {
             "type": "string",
@@ -944,19 +1270,59 @@
           "date": {
             "type": "date",
             "description": "Pet's birthdate",
-            "example": "2020.09.2020"
+            "example": "2020.09.20"
           },
           "breed": {
             "type": "string",
             "description": "Breed's sex",
             "example": "Pomeranian"
           },
-          "petAvatar": {
+          "avatarUrl": {
             "type": "string",
             "description": "Pet owner's location",
             "format": "binary"
           },
-          "comments": {
+          "comment": {
+            "type": "string",
+            "description": "Comments about pet",
+            "example": "Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet"
+          }
+        }
+      },
+      "AddPetResponse": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Pet's name",
+            "example": "Rich"
+          },
+          "date": {
+            "type": "date",
+            "description": "Pet's birthdate",
+            "example": "2020.09.20"
+          },
+          "breed": {
+            "type": "string",
+            "description": "Pet's breed",
+            "example": "Pomeranian"
+          },
+          "avatarUrl": {
+            "type": "object",
+            "properties": {
+              "secure_url": {
+                "type": "string",
+                "description": "pet avatar's url",
+                "example": "https://res.cloudinary.com/dggq7qmr5/image/upload/v1676222925/petly_project/user_pets_img/63e921cc05bb4ffa8102ec34.jpg"
+              },
+              "public_id": {
+                "type": "string",
+                "description": "pet avatar's id",
+                "example": "string"
+              }
+            }
+          },
+          "comment": {
             "type": "string",
             "description": "Comments about pet",
             "example": "Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet"
@@ -971,6 +1337,22 @@
             "type": "string",
             "description": "User avatar",
             "format": "binary"
+          }
+        }
+      },
+      "AddNoticeToFavoriteResponse": {
+        "type": "object",
+        "properties": {
+          "favorite": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "message": {
+            "type": "String",
+            "description": "Response successful message",
+            "example": "The notice has been added to favorites"
           }
         }
       }

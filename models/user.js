@@ -3,8 +3,8 @@ const { Schema, model } = require("mongoose");
 const { handleMongooseError } = require("../helpers");
 const emailRegexp = /^(?=.{10,63}$)([A-Za-z0-9._-]{2,}@[A-Za-z0-9._-]{2,})$/;
 const phoneRegexp = /^\+380\d{9}$/;
-const nameRegexp = /^[a-zA-Z]+$/;
-const addressRegexp = /[a-zA-Z]+, [a-zA-Z]+/i;
+const nameRegexp = /^([A-Za-zА-Яа-я\-\s])?$/;
+const addressRegexp = /^$|^([A-Za-zА-Яа-я]+),\s([A-Za-zА-Яа-я]+)?$/;
 const pwdRegexp = /^[\S]{7,32}$/;
 const bdayRegexp =
   /^(0?[1-9]|[12][0-9]|3[01])[\.\-](0?[1-9]|1[012])[\.\-]\d{4}$/;
@@ -14,6 +14,7 @@ const userSchema = new Schema(
     name: {
       type: String,
       match: nameRegexp,
+      minlength: 2,
       required: [true, "Name is required"],
     },
     email: {
@@ -25,7 +26,7 @@ const userSchema = new Schema(
       required: [true, "Email is required"],
     },
     password: {
-      type: String,    
+      type: String,
       required: true,
     },
     birthday: {
