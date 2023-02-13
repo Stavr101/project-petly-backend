@@ -2,7 +2,7 @@ const Joi = require("joi");
 const { Schema, model } = require("mongoose");
 const { handleMongooseError } = require("../helpers");
 
-const nameRegexp = /^([A-Za-zА-Яа-яІі-\s]{2,16})?$/;
+const nameRegexp = /^([A-Za-zА-Яа-яІіЇїЄєҐґ-\s]{2,16})+$/;
 const dateRegexp =
   /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
 
